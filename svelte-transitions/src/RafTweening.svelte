@@ -1,30 +1,34 @@
 <script lang="ts">
+  export let target = 50;
+  export let duration = 2000;
+  export let x = 10;
+  $: cleanX = Math.round(x);
 
-    let x = 10;
-    export let target = 50;
+  const tween = (targetPos: number, duration: number) => {
+    const startPos = x;
+    const start = window.performance.now();
+    const dist = (t) => startPos + t * (targetPos - startPos);
 
-    const tween = (targetPos: number, speed: number = 1) => {
-        const sign = Math.sign(targetPos - x)
-        const animate = () => {
-            if ((sign >= 0 && x >= targetPos)
-                || (sign < 0 && x <= targetPos)) {
-                x = targetPos
-            } else {
-                x += sign * speed
-                window.requestAnimationFrame(animate)
-            }
-        }
+    const animate = () => {
+      const elapsed = window.performance.now() - start;
+      if (elapsed > duration) {
+        x = targetPos;
+      } else {
+        x = dist(elapsed / duration);
         window.requestAnimationFrame(animate);
-    }
-    $:tween(target)
+      }
+    };
+    window.requestAnimationFrame(animate);
+  };
+  $:tween(target, duration);
 
 </script>
 
 <div class="container">
-    <h3>Tweening with RAF</h3>
-    <div class="circle" style="left:{x}%">
-        <span class="text">{x}%</span>
-    </div>
+  <h3>Tweening with RAF</h3>
+  <div class="circle" style="left:{x}%">
+    <span class="text">{cleanX}%</span>
+  </div>
 </div>
 
 <style type="text/scss">

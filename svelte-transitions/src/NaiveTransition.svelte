@@ -6,14 +6,14 @@
     const jump = () => x += 5;
 
     const smoothMove = (step: number, duration = 1) => {
-        let start = window.performance.now();
+        const start = window.performance.now();
         const loopID = setInterval(() => {
-                const now = window.performance.now();
-                if (now > start + duration * 1000) {
-                    clearInterval(loopID);
-                }
-                x += step
-            }, 1000 / 60  // 60 fps
+              const now = window.performance.now();
+              if (now > start + duration * 1000) {
+                  clearInterval(loopID);
+              }
+              x += step;
+          }, 1000 / 60  // 60 fps
         );
 
     }

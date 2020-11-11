@@ -1,22 +1,27 @@
 <script lang="ts">
 
-    let x = 10;
     export let target = 50;
-    const tween = (targetPos: number, speed: number = 1) => {
+    export let duration = 2000;
+    export let x = 10;
 
-        const sign = Math.sign(targetPos - x)
+    $: cleanX = Math.round(x);
+
+    const tween = (targetPos: number, duration: number) => {
+        const startPos = x;
+        const start = window.performance.now();
+        const dist = (t) => startPos + t * (targetPos - startPos);
+
         const loopID = setInterval(() => {
-                if ((sign >= 0 && x >= targetPos)
-                    || (sign < 0 && x <= targetPos)) {
-                    x = targetPos;
-                    clearInterval(loopID);
-                } else {
-                    x += sign * speed;
-                }
-            }, 1000 / 60  // 60 fps
+              const elapsed = window.performance.now() - start;
+              if (elapsed > duration) {
+                  clearInterval(loopID);
+              } else {
+                  x = dist(elapsed / duration);
+              }
+          }, 1000 / 60  // 60 fps
         );
     }
-    $:tween(target)
+    $:tween(target, duration);
 
 
 </script>
@@ -24,7 +29,7 @@
 <div class="container">
     <h3>Naive Tweening with setInterval</h3>
     <div class="circle" style="left:{x}%">
-        <span class="text">{x}%</span>
+        <span class="text">{cleanX}%</span>
     </div>
 </div>
 

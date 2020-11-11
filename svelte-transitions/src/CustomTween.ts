@@ -4,22 +4,22 @@ export interface Tweened extends Readable<number> {
   set(value: number): void;
 }
 
-export function tween(init: number): Tweened {
-  const speed = 1;
+export function tween(init: number, duration: number): Tweened {
   const store = writable(init);
   let newPos = init;
 
   function set(targetPos: number): void {
-    const sign = Math.sign(targetPos - newPos);
+    const startPos = newPos;
+    const start = window.performance.now();
+    const dist = (t) => startPos + t * (targetPos - startPos);
+
     const animate = () => {
-      if (
-        (sign >= 0 && newPos >= targetPos) ||
-        (sign < 0 && newPos <= targetPos)
-      ) {
+      const elapsed = window.performance.now() - start;
+      if (elapsed > duration) {
         newPos = targetPos;
         store.set(newPos);
       } else {
-        newPos += sign * speed;
+        newPos = dist(elapsed / duration);
         store.set(newPos);
         window.requestAnimationFrame(animate);
       }

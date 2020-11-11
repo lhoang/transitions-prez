@@ -1,18 +1,21 @@
 <script lang="ts">
-    import {tween} from "./CustomTween";
+  import { tween } from "./CustomTween";
 
-    export let target = 50;
-    const x = tween(10)
-    $: x.set(target)
+  export let target = 50;
+  export let duration = 2000;
+  export let init = 10;
+
+  $: x = tween(init, duration);
+  $: x.set(target);
 
 
 </script>
 
 <div class="container">
-    <h3>Custom Tweening with Svelte</h3>
-    <div class="circle" style="left:{$x}%">
-        <span class="text">{$x}%</span>
-    </div>
+  <h3>Custom Tweening with Svelte Store</h3>
+  <div class="circle" style="left:{$x}%">
+    <span class="text">{Math.round($x)}%</span>
+  </div>
 </div>
 
 <style type="text/scss">

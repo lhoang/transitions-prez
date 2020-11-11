@@ -4,5 +4,5 @@
   "svelteBracketNewLine": false,
   "svelteAllowShorthand": true,
   "svelteIndentScriptAndStyle": true,
-  "prettier.semi": false
+  "prettier.semi": true
 }
