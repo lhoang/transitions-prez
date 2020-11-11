@@ -5,8 +5,8 @@
   export let duration = 2000;
   export let init = 10;
 
-  $: x = tween(init, duration);
-  $: x.set(target);
+  const x = tween(init);
+  $: x.set(target, duration);
 
 
 </script>

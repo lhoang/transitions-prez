@@ -1,9 +1,10 @@
 <script lang="ts">
-  import NaiveTransition from "./NaiveTransition.svelte";
-  import NaiveTweening from "./NaiveTweening.svelte";
-  import RafTweening from "./RafTweening.svelte";
-  import SvelteTweening from "./SvelteTweening.svelte";
+  import NaiveTransition from "./part1/NaiveTransition.svelte";
+  import NaiveTweening from "./part1/NaiveTweening.svelte";
+  import RafTweening from "./part1/RafTweening.svelte";
+  import SvelteTweening from "./part1/SvelteTweening.svelte";
   import { calculatePrimes } from "./heavyComputation";
+  import FunTweening from "./part2/FunTweening.svelte";
 
   let target = 10;
   let duration = 2000;
@@ -35,6 +36,8 @@
   <NaiveTweening {target} {duration} />
   <RafTweening {target} {duration} />
   <SvelteTweening {target} {duration} />
+
+  <FunTweening />
 
 </main>
 
