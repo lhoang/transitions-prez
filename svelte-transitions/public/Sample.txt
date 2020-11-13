@@ -1,0 +1,29 @@
+#TITLE:Le chasseur
+#ARTIST:Michel Delpech
+#BPM:320
+#GAP:5488
+: 0 1 0 Il
+: 2 1 0  é
+: 4 1 0 tait
+: 6 1 0  cinq
+: 9 2 0  heures
+: 14 1 0  du
+: 16 1 0  ma
+: 19 5 0 tin
+- 26
+: 33 1 0 On
+: 36 1 0  a
+: 38 1 0 van
+: 40 1 0 çait
+: 44 1 0  dans
+: 47 1 0  les
+: 49 1 0  ma
+: 52 4 0 rais
+- 64
+: 75 1 0 Cou
+: 78 1 0 verts
+: 82 1 0  de
+: 85 1 0  bru
+: 89 9 0 me
+- 111
+E
