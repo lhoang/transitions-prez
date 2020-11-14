@@ -49,7 +49,7 @@ export function convertToSong(text: string) {
 
     return {
       ms,
-      word,
+      words,
     };
   });
 
@@ -82,7 +82,7 @@ export function getEltPositions(elements: Array<HTMLElement>): Array<number> {
       .filter((c) => c.clientWidth > 0)
       .map((wordNode) => {
         const props: DOMRect = wordNode.getBoundingClientRect();
-        return props.left + props.width / 4;
+        return props.left + props.width / 6;
       });
   } else {
     return [];

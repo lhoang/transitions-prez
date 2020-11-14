@@ -42,6 +42,11 @@
   let playing = false;
   let i: number;
 
+  const stop = () => {
+    playing = false;
+    measure = 0;
+  };
+
   const play = () => {
     if (playing) {
       playing = !playing;
@@ -109,26 +114,45 @@
 
 
 </script>
+<svelte:head>
+  <link href="http://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+</svelte:head>
 
-<button on:click={play}> {playing ? '⏸' : '▶️' } </button>
-<div>Measure : {measure}</div>
-
-<div class="ball" style="left:{$ballX}px; bottom: {25+$ballY*25}px"></div>
-<div class="current-line" bind:this={lineElt}>
-  {#each currentLine?.words ?? [] as word}
-    <div class="word">
-      {@html word.text.replace(' ', '&nbsp;')}
+<div class="container">
+  <div class="controls">
+    <button on:click={play}> {playing ? '⏸' : '▶️' } </button>
+    <button on:click={stop}> ⏹</button>
+    <div>Measure : {measure}</div>
+  </div>
+  <div class="lyrics">
+    <div class="ball" style="left:{$ballX}px; bottom: {25+$ballY*25}px"></div>
+    <div class="current-line" bind:this={lineElt}>
+      {#each currentLine?.words ?? [] as word}
+        <div class="word">
+          {@html word.text.replace(' ', '&nbsp;')}
+        </div>
+      {/each}
     </div>
-  {/each}
-
-
+  </div>
 </div>
 
+
+
+
 <style type="text/scss">
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lyrics {
+    margin-top: 15vh;
+  }
+
   .ball {
     border: solid 1px black;
     border-radius: 50%;
-    background-color: yellow;
+    background-color: var(--font-color);
     width: 2rem;
     height: 2rem;
     position: relative;
@@ -141,10 +165,18 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    font-size: 5rem;
+    font-family: 'VCR OSD Mono', sans-serif;
+    font-size: 3rem;
+    -webkit-text-stroke: 1px black;
+    -webkit-text-fill-color: var(--font-color);
   }
 
-  .word {
+  button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
   }
 
 </style>

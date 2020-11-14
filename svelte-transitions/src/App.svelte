@@ -47,6 +47,7 @@
 <style type="text/scss">
   :root {
     --zenika-red: #b21e3e;
+    --font-color: #ffd42a;
   }
 
   main {
