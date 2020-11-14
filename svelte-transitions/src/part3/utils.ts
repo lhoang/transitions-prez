@@ -4,10 +4,10 @@ import type { Line, Song, Word } from './karaoke.interface';
 export function convertToSong(text: string) {
   const [metaraw, raw]: Array<Array<string>> = splitWhen(
     (l: string) => !l.startsWith('#'),
-    text.split('\n')
+    text.split(/\r?\n/)
   );
 
-  const regexParams = /#(\w+):([\w\. ]+)/;
+  const regexParams = /#(\w+):(.+)/;
   const metadata = Object.fromEntries(
     metaraw.map((d) => {
       const match = d.match(regexParams);
@@ -23,7 +23,7 @@ export function convertToSong(text: string) {
       return found;
     } else {
       const [line, tail]: Array<Array<string>> = splitWhen(
-        (row: string) => row.startsWith('-'),
+        (row: string) => '-E'.includes(row[0]),
         remaining
       );
       const endLine = tail.shift();
@@ -31,21 +31,26 @@ export function convertToSong(text: string) {
     }
   };
 
-  const regexWord = /: (\d+) \d+ \d+ (.*)/;
+  const regexWord = /(:|F|\*) (\d+) \d+ \d+ (.*)/;
+  const regexReturnLine = /- (\d+) ?.*/;
   const lines = recSplitLines(raw, []).map((line) => {
-    const ms = line[line.length - 1].startsWith('-')
-      ? +line[line.length - 1].replace('- ', '')
-      : 0;
-
     const words = line
-      .filter((w) => !w.startsWith('-'))
+      .filter((w) => !'-E'.includes(w[0]))
       .map((word) => {
         const match = word.match(regexWord);
+        if (match.length < 3) {
+          console.log('Error with ' + word);
+          throw new Error('Error with ' + word);
+        }
         return {
-          ms: +match[1],
-          text: match[2],
+          ms: +match[2],
+          text: match[3],
         } as Word;
       });
+
+    const foundMs = line[line.length - 1].match(regexReturnLine);
+    const ms =
+      foundMs?.length == 2 ? +foundMs[1] : words[words.length - 1].ms + 2;
 
     return {
       ms,
@@ -55,10 +60,14 @@ export function convertToSong(text: string) {
 
   return {
     ...metadata,
-    bpm: +metadata['bpm'],
-    gap: +metadata['gap'],
+    bpm: toNumber(metadata['bpm']),
+    gap: toNumber(metadata['gap']),
     lyrics: lines,
   } as Song;
+}
+
+function toNumber(param: string): number {
+  return +param.replace(',', '.');
 }
 
 export async function readFile(path: string): Promise<Song> {

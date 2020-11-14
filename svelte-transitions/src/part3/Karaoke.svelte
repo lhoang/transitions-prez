@@ -2,7 +2,10 @@
   import { readFile } from "./utils";
   import SingingLine from "./SingingLine.svelte";
 
-  let pData = readFile("../Sample.txt");
+  // let pData = readFile("../Manau.txt");
+  // let pData = readFile("../Sample.txt");
+  // let pData = readFile("../BonnieTyler.txt");
+  let pData = readFile("../Queen.txt");
 
 </script>
 
@@ -10,19 +13,9 @@
 <div class="container">
   {#await pData then song}
     <h2>{song.title} - {song.artist}</h2>
-
-    <!--    <div class="lyrics">-->
-    <!--      {#each song.lyrics as line}-->
-    <!--        <div class="line">-->
-    <!--          {line.words.map(w => w.text).join('')}-->
-    <!--        </div>-->
-    <!--      {/each}-->
-    <!--    </div>-->
-
     <div class="current">
       <SingingLine {song} />
     </div>
-
   {/await}
 </div>
 

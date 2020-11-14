@@ -1,6 +1,6 @@
 #TITLE:Le chasseur
 #ARTIST:Michel Delpech
-#BPM:320
+#BPM:223.36
 #GAP:5488
 : 0 1 0 Il
 : 2 1 0  é
