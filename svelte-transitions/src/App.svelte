@@ -23,22 +23,22 @@
 </script>
 
 <main>
-  <!--  <button class:computing on:click={() => compute()}>Heavy Computation</button>-->
-  <!--  <NaiveTransition />-->
-  <!--  <div class="inputs">-->
-  <!--    <input type="range" min="0" max="100" bind:value={target}>-->
-  <!--    <div class="field">-->
-  <!--      <label for="duration">Duration</label>-->
-  <!--      <input id="duration" type="text" bind:value={duration}>ms-->
-  <!--    </div>-->
+<!--    <button class:computing on:click={() => compute()}>Heavy Computation</button>-->
+<!--    <NaiveTransition />-->
+<!--    <div class="inputs">-->
+<!--      <input type="range" min="0" max="100" bind:value={target}>-->
+<!--      <div class="field">-->
+<!--        <label for="duration">Duration</label>-->
+<!--        <input id="duration" type="text" bind:value={duration}>ms-->
+<!--      </div>-->
 
-  <!--  </div>-->
+<!--    </div>-->
 
-  <!--  <NaiveTweening {target} {duration} />-->
-  <!--  <RafTweening {target} {duration} />-->
-  <!--  <SvelteTweening {target} {duration} />-->
+<!--    <NaiveTweening {target} {duration} />-->
+<!--    <RafTweening {target} {duration} />-->
+<!--    <SvelteTweening {target} {duration} />-->
 
-  <!--  <FunTweening />-->
+<!--    <FunTweening />-->
 
   <Karaoke></Karaoke>
 

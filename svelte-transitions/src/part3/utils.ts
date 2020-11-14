@@ -91,7 +91,10 @@ export function getEltPositions(elements: Array<HTMLElement>): Array<number> {
       .filter((c) => c.clientWidth > 0)
       .map((wordNode) => {
         const props: DOMRect = wordNode.getBoundingClientRect();
-        return props.left + props.width / 6;
+        // remove half the ball and body, main padding/margin
+        const pos = props.left + props.width / 2 - 18 - 24;
+        // console.log({pos, text: wordNode.innerText});
+        return pos;
       });
   } else {
     return [];

@@ -5,7 +5,7 @@
   import { transpose } from "ramda";
 
   export let song: Song;
-  const ballHigh = 25;
+  const ballHigh =30;
 
 
   const ballX = tweened(100, {
@@ -22,7 +22,7 @@
       const g = 4;
       const alpha = Math.PI / 4;
       const v0 = 1.41;
-      return t => -g / 2 * Math.pow(t, 2) + v0 * Math.sin(alpha) * t;
+      return t => g / 2 * Math.pow(t, 2) - v0 * Math.sin(alpha) * t  - 1;
     }
   });
 
@@ -73,7 +73,7 @@
         }
         window.requestAnimationFrame(continuePlaying);
       } else {
-        playing = false;
+        stop();
       }
     };
     window.requestAnimationFrame(continuePlaying);
@@ -132,7 +132,8 @@
     <!--    <div>Measure : {measure}, beat: {beat}ms, BPM: {song.bpm}</div>-->
   </div>
   <div class="lyrics">
-    <div class="ball" style="left:{$ballX}px; bottom: {ballHigh+$ballY*ballHigh}px"></div>
+<!--    <div class="ball" style="left:{$ballX}px; bottom: {ballHigh+$ballY*ballHigh}px"></div>-->
+    <div class="ball" style="transform: translate({$ballX}px, {$ballY*ballHigh}px)"></div>
     <div class="current-line" bind:this={lineElt}>
       {#each currentLine?.words ?? [] as word}
         <div class="word">
@@ -203,8 +204,12 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 4vw;
     -webkit-text-stroke: 1px black;
+  }
+
+  .word {
+    //border: 1px solid darkred;
   }
 
   button {

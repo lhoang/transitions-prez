@@ -31,44 +31,44 @@ describe('Karaoke Utils', () => {
       {
         ms: 64,
         words: [
-          { ms: 33, text"On"n' },
-          { ms: 36, text" a"a'},
-       ],
-     },
+          { ms: 33, text: 'On' },
+          { ms: 36, text: ' a' },
+        ],
+      },
     ]);
   });
 
-  i"should parse Song lyrics with F, * and End"d', () => {
+  it('should parse Song lyrics with F, * and End', () => {
     const song = convertToSong(rawText2);
     expect(song.lyrics).toHaveLength(2);
     expect(song.lyrics).toEqual([
       {
         ms: 38,
         words: [
-          { ms: 0, text"Le"e' },
-          { ms: 4, text" vent"t'},
-       ],
+          { ms: 0, text: 'Le' },
+          { ms: 4, text: ' vent' },
+        ],
       },
       {
         ms: 46,
         words: [
-          { ms: 40, text"de"e' },
-          { ms: 44, text" la"a'},
-       ],
-     },
+          { ms: 40, text: 'de' },
+          { ms: 44, text: ' la' },
+        ],
+      },
     ]);
     expect(song.bpm).toEqual(374.4);
   });
 
 
-  i"should get the timings of a line"e', () => {
+  it('should get the timings of a line', () => {
     const line: Line = {
       ms: 10,
       words: [
-        { ms: 40, text"Il"l' },
-        { ms: 42, text" é"é' },
-        { ms: 46, text" tait"t'},
-     ],
+        { ms: 40, text: 'Il' },
+        { ms: 42, text: ' é' },
+        { ms: 46, text: ' tait' },
+      ],
     };
 
     const res = getLineTimings(line, 38, 150);
@@ -90,14 +90,14 @@ const rawText =
   'E';
 
 const rawText2 =
-  "#ARTIST:Manau\r\n" +
-  "#TITLE:La tribu de Dana\r\n" +
-  "#BPM:374,4\n" +
-  "#GAP:15910\r\n" +
-  "F 0 2 0 Le\r\n" +
-  "F 4 5 0  vent\r\n" +
-  "- 38 40\r\n" +
-  "F 40 2 0 de\r\n" +
-  "* 44 2 0  la\r\n" +
-  "E\r\n" +
-  "";
+  '#ARTIST:Manau\r\n' +
+  '#TITLE:La tribu de Dana\r\n' +
+  '#BPM:374,4\n' +
+  '#GAP:15910\r\n' +
+  'F 0 2 0 Le\r\n' +
+  'F 4 5 0  vent\r\n' +
+  '- 38 40\r\n' +
+  'F 40 2 0 de\r\n' +
+  '* 44 2 0  la\r\n' +
+  'E\r\n' +
+  '';
