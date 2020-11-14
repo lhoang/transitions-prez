@@ -1,5 +1,6 @@
 // Isolated Module ?
-import { convertToSong } from './utils';
+import { convertToSong, getLineTimings } from "./utils";
+import type { Line } from "./karaoke.interface";
 
 export {};
 
@@ -35,6 +36,20 @@ describe('Karaoke Utils', () => {
         ],
       },
     ]);
+  });
+
+  it('should get the timings of a line', () => {
+    const line: Line = {
+      ms: 10,
+      words: [
+        { ms: 40, text: 'Il' },
+        { ms: 42, text: ' é' },
+        { ms: 46, text: ' tait' },
+      ],
+    };
+
+    const res = getLineTimings(line, 38, 150);
+    expect(res).toEqual([300, 300, 600]);
   });
 });
 

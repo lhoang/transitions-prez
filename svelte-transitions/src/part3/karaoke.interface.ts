@@ -1,10 +1,10 @@
 export interface Word {
-  ts: number;
+  ms: number;
   text: string;
 }
 
 export interface Line {
-  ts: number;
+  ms: number;
   words: Array<Word>;
 }
 
