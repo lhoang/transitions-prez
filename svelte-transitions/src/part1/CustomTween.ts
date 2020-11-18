@@ -13,14 +13,13 @@ export function tween(init: number): Tweened {
     const start = window.performance.now();
     const dist = (t) => startPos + t * (targetPos - startPos);
 
-    const animate = () => {
-      // TODO : utiliser TS
-      const elapsed = window.performance.now() - start;
-      if (elapsed > duration) {
+    const animate = (ts: number) => {
+      const t = (ts - start) / duration;
+      if (t >= 1) {
         newPos = targetPos;
         store.set(newPos);
       } else {
-        newPos = dist(elapsed / duration);
+        newPos = dist(t);
         store.set(newPos);
         window.requestAnimationFrame(animate);
       }

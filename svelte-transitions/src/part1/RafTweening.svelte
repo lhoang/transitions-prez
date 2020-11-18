@@ -9,12 +9,12 @@
     const start = window.performance.now();
     const dist = (t) => startPos + t * (targetPos - startPos);
 
-    const animate = () => {
-      const elapsed = window.performance.now() - start;
-      if (elapsed > duration) {
+    const animate = (ts: number) => {
+      const t = (ts - start) / duration;
+      if (t >= 1) {
         x = targetPos;
       } else {
-        x = dist(elapsed / duration);
+        x = dist(t);
         window.requestAnimationFrame(animate);
       }
     };

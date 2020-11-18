@@ -2,10 +2,10 @@
   import { readFile } from "./utils";
   import SingingLine from "./SingingLine.svelte";
 
-  // let pData = readFile("../Manau.txt");
+   let pData = readFile("../Manau.txt");
   // let pData = readFile("../Sample.txt");
   // let pData = readFile("../BonnieTyler.txt");
-  let pData = readFile("../Queen.txt");
+  //let pData = readFile("../Queen.txt");
 
 </script>
 

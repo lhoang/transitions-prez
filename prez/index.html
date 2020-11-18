@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>How do draw an owl</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/solarized-light.css">
+
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>How to draw an owl</h1>
+        </section>
+        <section>
+            <img src="assets/owl.jpg" alt="how to drawn an owl">
+        </section>
+        <section>
+            <h2>Animation naïve</h2>
+            <h3>Translation 2D avec setInterval()</h3>
+        </section>
+        <section>
+            $$ d = v \cdot t $$
+            avec vitesse fixe, durée fixe
+        </section>
+        <section>
+            <h2>Tweening</h2>
+            (ou interpolation) <br>
+            $$ A \to B $$
+            distance fixe, durée fixe <br>
+            vitesse variable
+        </section>
+        <section>
+            <h3>Tweening avec setInterval()</h3>
+            <ul>
+                <li>
+                    Arguments : position d'origine x<sub>A</sub>, position cible x<sub>B</sub>, durée D
+                </li>
+                <li>Normalisation du temps (t ∈ [0, 1])</li>
+            </ul>
+            \[\begin{aligned}
+            t &amp; = t_{écoulé} / D \\
+            tween(t) &amp; = x_A + t \cdot (x_B - x_A) \\
+            tween(0) &amp; = x_A \\
+            tween(1) &amp; = x_B \\
+            \end{aligned} \]
+        </section>
+        <section>
+            <h3>RAF</h3>
+            <pre><code class="hljs javascript" data-trim>
+                   window.requestAnimationFrame(callback);
+            </code></pre>
+            <ul>
+                <li>Le browser appelera la fonction avant le prochain repaint</li>
+                <li>callback(ts) avec ts, timestamp en ms</li>
+                <li>Permet de synchroniser et d'optimiser toutes les animations</li>
+                <li>Mis en pause si l'onglet n'est pas visible</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Utilisation</h3>
+            <pre><code class="hljs javascript" data-trim>
+    const start = window.performance.now();
+
+    const animate = (ts: number) => {
+      const t = (ts - start) / duration;
+      if (t >= 1) {
+        // Condition de sortie
+      } else {
+        // Animation avec t et appel récursif
+        window.requestAnimationFrame(animate);
+      }
+    };
+    window.requestAnimationFrame(animate);
+            </code></pre>
+        </section>
+        <section>
+            <h3>Utilitaire avec un store de Svelte</h3>
+        </section>
+        <section>
+            <h3>Store Svelte</h3>
+            <pre><code class="hljs javascript" data-trim>
+                // Init
+                const store = writable(0);
+                // MAJ
+                store.set(100);
+                store.update( n => n + 1)
+                // Abonnement et désabonnement
+                const unsubscribe = store.subscribe( value => console.log(value) );
+                unsubscribe();
+
+                // Auto-abonnement/désabonnement
+                $store
+            </code></pre>
+            Un peu comme useContext() en React ou BehaviorSubject en Angular/RxJs
+        </section>
+        <section>
+            <h3>Tweened, by Svelte</h3>
+            <a href="https://svelte.dev/docs#tweened" target="_blank"> https://svelte.dev/docs#tweened</a>
+        </section>
+        <section>
+            <h3>Application du tweening sur d'autres propriétés</h3>
+        </section>
+        <section>
+            <h3>Credits</h3>
+            <ul>
+                <li>Image Super Mario Bros - Nintendo</li>
+            </ul>
+            <h3>Github Repository</h3>
+            <ul>
+                <li>
+                https://github.com/lhoang/velib
+                </li>
+                <li>Pull Request Typescript : https://github.com/lhoang/velib/pull/4</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        hash: true,
+        width: "80%",
+        height: "95%",
+        margin: 0,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/highlight/highlight.js'},
+            {src: 'plugin/math/math.js'},
+            {src: 'plugin/notes/notes.js', async: true}
+        ],
+    });
+</script>
+</body>
+</html>

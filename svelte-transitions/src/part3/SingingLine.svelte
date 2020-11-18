@@ -5,7 +5,7 @@
   import { transpose } from "ramda";
 
   export let song: Song;
-  const ballHigh =30;
+  const ballHigh =35;
 
 
   const ballX = tweened(100, {
