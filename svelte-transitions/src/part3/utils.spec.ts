@@ -1,5 +1,5 @@
 // Isolated Module ?
-import { convertToSong, getLineTimings } from "./utils";
+import { convertToSong, exportSong, getLineTimings } from "./utils";
 import type { Line } from "./karaoke.interface";
 
 export {};
@@ -11,7 +11,7 @@ describe('Karaoke Utils', () => {
       expect.objectContaining({
         title: 'le chasseur',
         artist: 'michel delpech',
-        bpm: 223.36,
+        bpm: 200,
         gap: 5488,
       })
     );
@@ -74,12 +74,33 @@ describe('Karaoke Utils', () => {
     const res = getLineTimings(line, 38, 150);
     expect(res).toEqual([300, 300, 600]);
   });
+
+  it("should export the song with timings", () => {
+    const song = exportSong(rawText);
+    expect(song.lyrics).toHaveLength(2);
+    expect(song.lyrics).toEqual([
+      {
+        ms: 26,
+        words: [
+          { ms: 0, text: 'Il' },
+          { ms: 150, text: ' é' },
+        ],
+      },
+      {
+        ms: 64,
+        words: [
+          { ms: 525, text: 'On' },
+          { ms: 225, text: ' a' },
+        ],
+      },
+    ]);
+  });
 });
 
 const rawText =
   '#TITLE:le chasseur\n' +
   '#ARTIST:michel delpech\n' +
-  '#BPM:223.36\n' +
+  '#BPM:200\n' +
   '#GAP:5488\n' +
   ': 0 1 0 Il\n' +
   ': 2 1 0  é\n' +

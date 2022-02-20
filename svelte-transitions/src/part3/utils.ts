@@ -66,12 +66,43 @@ export function convertToSong(text: string) {
   } as Song;
 }
 
+export function exportSong(text: string, speed: number = 2): Song {
+  const song = convertToSong(text);
+
+  let startLine = 0;
+  const beat = 60 * 1000 / song.bpm / 2 / speed;
+  const lines = song.lyrics
+          .map(line => {
+            const timings = getLineTimings(line, startLine, beat);
+            startLine = line.ms;
+            return {
+              ms: line.ms,
+              words: line.words.map((word, i) => ({
+                ms: Math.round(timings[i] * 100) / 100,
+                text: word.text,
+              }))
+            }
+          })
+
+  return {
+    ...song,
+    lyrics: lines,
+  }
+
+
+}
+
 function toNumber(param: string): number {
   return +param.replace(',', '.');
 }
 
 export async function readFile(path: string): Promise<Song> {
   const text = await fetch(path).then((response) => response.text());
+
+  // TODO : temp, remove
+  const xpSong = exportSong(text, 4);
+  console.log(xpSong);
+
   return convertToSong(text);
 }
 

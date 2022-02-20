@@ -6,6 +6,7 @@
   import { calculatePrimes } from "./heavyComputation";
   import FunTweening from "./part2/FunTweening.svelte";
   import Karaoke from "./part3/Karaoke.svelte";
+  import WaapiTweening from "./part1/WaapiTweening.svelte";
 
   let target = 10;
   let duration = 2000;
@@ -24,23 +25,24 @@
 
 <main>
 <!--    <button class:computing on:click={() => compute()}>Heavy Computation</button>-->
-<!--    <NaiveTransition />-->
-<!--    <div class="inputs">-->
-<!--      <input type="range" min="0" max="100" bind:value={target}>-->
-<!--      <div class="field">-->
-<!--        <label for="duration">Duration</label>-->
-<!--        <input id="duration" type="text" bind:value={duration}>ms-->
-<!--      </div>-->
+    <NaiveTransition />
+    <div class="inputs">
+      <input type="range" min="0" max="100" bind:value={target}>
+      <div class="field">
+        <label for="duration">Duration</label>
+        <input id="duration" type="text" bind:value={duration}>ms
+      </div>
 
-<!--    </div>-->
+    </div>
 
 <!--    <NaiveTweening {target} {duration} />-->
 <!--    <RafTweening {target} {duration} />-->
 <!--    <SvelteTweening {target} {duration} />-->
+    <WaapiTweening {target} {duration} />
 
 <!--    <FunTweening />-->
 
-  <Karaoke></Karaoke>
+<!--  <Karaoke></Karaoke>-->
 
 </main>
 
