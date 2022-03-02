@@ -4,6 +4,7 @@
 
     const reset = () => x = 10;
     const jump = () => x += 5;
+    $: cleanX = Math.round(x);
 
     const smoothMove = (step: number, duration = 1) => {
         const start = window.performance.now();
@@ -23,7 +24,7 @@
     <button on:click={() => smoothMove(.25)}>Click me</button>
     <button on:click={() => reset()}>Reset</button>
     <div class="circle" style="left:{x}%">
-        <span class="text">{x}%</span>
+        <span class="text">{cleanX}%</span>
     </div>
 </div>
 

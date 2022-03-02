@@ -11,6 +11,8 @@
   let target = 10;
   let duration = 2000;
 
+  let hash = document.location.hash.replace(/^#/,'')
+
   let computing = false;
   const compute = () => {
     computing = true;
@@ -24,25 +26,38 @@
 </script>
 
 <main>
-<!--    <button class:computing on:click={() => compute()}>Heavy Computation</button>-->
-    <NaiveTransition />
-    <div class="inputs">
-      <input type="range" min="0" max="100" bind:value={target}>
-      <div class="field">
-        <label for="duration">Duration</label>
-        <input id="duration" type="text" bind:value={duration}>ms
-      </div>
+    {#if hash === 'naive'}
+        <NaiveTransition/>
+    {/if}
+    {#if ['naive-tween', 'raf-tween', 'svelte-tween'].includes(hash)}
+        <!--    <button class:computing on:click={() => compute()}>Heavy Computation</button>-->
+        <div class="inputs">
+            <input type="range" min="0" max="100" bind:value={target}>
+            <div class="field">
+                <label for="duration">Duration</label>
+                <input id="duration" type="text" bind:value={duration}>ms
+            </div>
+        </div>
+    {/if}
+    {#if hash === 'naive-tween'}
+        <NaiveTweening {target} {duration}/>
+    {/if}
 
-    </div>
+    {#if hash === 'raf-tween'}
+        <RafTweening {target} {duration}/>
+    {/if}
 
-<!--    <NaiveTweening {target} {duration} />-->
-<!--    <RafTweening {target} {duration} />-->
-<!--    <SvelteTweening {target} {duration} />-->
-    <WaapiTweening {target} {duration} />
+    {#if hash === 'svelte-tween'}
+        <NaiveTweening {target} {duration}/>
+        <RafTweening {target} {duration}/>
+        <SvelteTweening {target} {duration}/>
+    {/if}
 
-<!--    <FunTweening />-->
+<!--    <WaapiTweening {target} {duration}/>-->
 
-<!--  <Karaoke></Karaoke>-->
+    <!--    <FunTweening />-->
+
+    <!--  <Karaoke></Karaoke>-->
 
 </main>
 
@@ -55,7 +70,7 @@
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
+    //max-width: 240px;
     margin: 0 auto;
   }
 

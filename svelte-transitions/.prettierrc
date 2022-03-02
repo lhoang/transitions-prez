@@ -5,5 +5,9 @@
   "svelteAllowShorthand": true,
   "svelteIndentScriptAndStyle": true,
   "prettier.semi": true,
-  "singleQuote": true
+  "singleQuote": true,
+  "tabWidth": 2,
+  "semi": false,
+  "trailingComma": "all",
+  "arrowParens": "avoid"
 }
