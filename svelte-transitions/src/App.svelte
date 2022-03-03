@@ -53,6 +53,10 @@
         <SvelteTweening {target} {duration}/>
     {/if}
 
+    {#if hash === 'svg'}
+        <FunTweening/>
+    {/if}
+
 <!--    <WaapiTweening {target} {duration}/>-->
 
     <!--    <FunTweening />-->

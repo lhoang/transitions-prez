@@ -5,6 +5,9 @@
     export let x = 10;
 
     $: cleanX = Math.round(x);
+    let container: HTMLElement
+    let width: number
+    $: width = container?.clientWidth * 7/10
 
     const tween = (targetPos: number, duration: number) => {
         const startPos = x;
@@ -26,9 +29,9 @@
 
 </script>
 
-<div class="container">
+<div class="container" bind:this={container}>
     <h3>Naive Tweening with setInterval</h3>
-    <div class="circle" style="left:{x}%">
+    <div class="circle" style="transform: translateX({x/100 * width}px);">
         <span class="text">{cleanX}%</span>
     </div>
 </div>
@@ -37,7 +40,7 @@
   .container {
     border: #999999 1px solid;
     border-radius: 4px;
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
   }
 
   h3 {

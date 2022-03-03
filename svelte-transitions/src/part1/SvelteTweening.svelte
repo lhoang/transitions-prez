@@ -10,7 +10,7 @@
 
   let container: HTMLElement
   let width: number
-  $: width = container?.clientWidth * 9/10
+  $: width = container?.clientWidth * 7/10
 
 
 
@@ -27,7 +27,7 @@
   .container {
     border: #999999 1px solid;
     border-radius: 4px;
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
   }
 
   h3 {
