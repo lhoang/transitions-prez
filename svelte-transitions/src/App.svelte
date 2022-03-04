@@ -7,6 +7,8 @@
   import FunTweening from "./part2/FunTweening.svelte";
   import Karaoke from "./part3/Karaoke.svelte";
   import WaapiTweening from "./part1/WaapiTweening.svelte";
+  import OtherTween from "./part2/OtherTweening.svelte";
+  import OtherTweening from "./part2/OtherTweening.svelte";
 
   let target = 10;
   let duration = 2000;
@@ -53,6 +55,9 @@
         <SvelteTweening {target} {duration}/>
     {/if}
 
+    {#if hash === 'other'}
+        <OtherTweening/>
+    {/if}
     {#if hash === 'svg'}
         <FunTweening/>
     {/if}

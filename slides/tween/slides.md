@@ -356,6 +356,8 @@ url: https://svelte.dev/docs#run-time-svelte-motion-tweened
 # Tweened, by Svelte
 [https://svelte.dev/docs#run-time-svelte-motion-tweened](https://svelte.dev/docs#run-time-svelte-motion-tweened)
 
+<iframe id="other" class="w-full h-full" style="zoom: 0.75;" src="http://localhost:5000/#other"></iframe>
+
 
 ---
 layout: image-left
