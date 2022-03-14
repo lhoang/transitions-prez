@@ -9,11 +9,12 @@
   import WaapiTweening from "./part1/WaapiTweening.svelte";
   import OtherTween from "./part2/OtherTweening.svelte";
   import OtherTweening from "./part2/OtherTweening.svelte";
+  import Bullet from "./part3/Bullet.svelte";
 
   let target = 10;
   let duration = 2000;
 
-  let hash = document.location.hash.replace(/^#/,'')
+  let hash = document.location.hash.replace(/^#/, '')
 
   let computing = false;
   const compute = () => {
@@ -61,8 +62,11 @@
     {#if hash === 'svg'}
         <FunTweening/>
     {/if}
+    {#if hash === 'bullet'}
+        <Bullet/>
+    {/if}
 
-<!--    <WaapiTweening {target} {duration}/>-->
+    <!--    <WaapiTweening {target} {duration}/>-->
 
     <!--    <FunTweening />-->
 

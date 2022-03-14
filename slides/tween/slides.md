@@ -421,3 +421,36 @@ $$
 nothing
 
 ---
+layout: iframe-left
+url: http://localhost:5000/#bullet
+class: code-sm
+---
+
+```ts
+const ballX = tweened(0, {
+  interpolate: (a, b) => 
+    t => a + (b-a) * v0*Math.cos(alpha)*t,
+  duration,
+});
+
+const ballY = tweened(0, {
+  interpolate: () =>
+    t => (g/2*t**2 - v0*Math.sin(alpha)*t) * 100,
+  duration,
+});
+
+const speed = tweened(0, {
+  interpolate: () =>
+    t => Math.abs(g*t - v0*Math.sin(alpha))* 100,
+  duration,
+});
+```
+
+```html
+<div class="ball"
+   style="transform:translate({$ballX}vw, {$ballY}vh);
+          --color:{interpolatePlasma($speed/150)}">
+</div>
+```
+
+---

@@ -5,7 +5,7 @@
   import { transpose } from "ramda";
 
   export let song: Song;
-  const ballHigh =35;
+  const ballHigh = 35;
 
 
   const ballX = tweened(100, {
@@ -22,7 +22,7 @@
       const g = 4;
       const alpha = Math.PI / 4;
       const v0 = 1.41;
-      return t => g / 2 * Math.pow(t, 2) - v0 * Math.sin(alpha) * t  - 1;
+      return t => g / 2 * Math.pow(t, 2) - v0 * Math.sin(alpha) * t - 1;
     }
   });
 
@@ -69,7 +69,7 @@
           const newLine = lines[++indexLine];
           endLine = newLine.ms;
           currentLine = newLine;
-          ballX.set(100, { duration: 0 });
+          ballX.set(100, {duration: 0});
         }
         window.requestAnimationFrame(continuePlaying);
       } else {
@@ -103,8 +103,8 @@
         await previousPromise;
         // console.log({pos, timing});
         return await Promise.all([
-          ballX.set(pos, { duration: timing }),
-          ballY.set(0, { duration: timing })
+          ballX.set(pos, {duration: timing}),
+          ballY.set(0, {duration: timing})
         ]);
       }, Promise.resolve([]))
   )();
@@ -113,42 +113,42 @@
 
 
 <svelte:head>
-  <link href="http://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
 </svelte:head>
 
 <div class="container">
-  <div class="controls">
-    <div>
-      <button on:click={play}> {playing ? '⏸' : '▶️' } </button>
-      <button on:click={stop}> ⏹</button>
-    </div>
-
-    <div class="speed">
-      <label for="speed">Speed: {speed}</label>
-      <input id="speed" type="range" min="0.5" max="2" step="0.1"
-             bind:value={speed} />
-    </div>
-
-    <!--    <div>Measure : {measure}, beat: {beat}ms, BPM: {song.bpm}</div>-->
-  </div>
-  <div class="lyrics">
-<!--    <div class="ball" style="left:{$ballX}px; bottom: {ballHigh+$ballY*ballHigh}px"></div>-->
-    <div class="ball" style="transform: translate({$ballX}px, {$ballY*ballHigh}px)"></div>
-    <div class="current-line" bind:this={lineElt}>
-      {#each currentLine?.words ?? [] as word}
-        <div class="word">
-          {@html word.text.replace(' ', '&nbsp;')}
+    <div class="controls">
+        <div>
+            <button on:click={play}> {playing ? '⏸' : '▶️' } </button>
+            <button on:click={stop}> ⏹</button>
         </div>
-      {/each}
+
+        <div class="speed">
+            <label for="speed">Speed: {speed}</label>
+            <input id="speed" type="range" min="0.5" max="2" step="0.1"
+                   bind:value={speed}/>
+        </div>
+
+        <!--    <div>Measure : {measure}, beat: {beat}ms, BPM: {song.bpm}</div>-->
     </div>
-  </div>
+    <div class="lyrics">
+        <!--    <div class="ball" style="left:{$ballX}px; bottom: {ballHigh+$ballY*ballHigh}px"></div>-->
+        <div class="ball" style="transform: translate({$ballX}px, {$ballY*ballHigh}px)"></div>
+        <div class="current-line" bind:this={lineElt}>
+            {#each currentLine?.words ?? [] as word}
+                <div class="word">
+                    {@html word.text.replace(' ', '&nbsp;')}
+                </div>
+            {/each}
+        </div>
+    </div>
 </div>
 
 
-{#each { length: 20 } as i}
-  <div class="circle-container">
-    <div class="circle"></div>
-  </div>
+{#each {length: 20} as i}
+    <div class="circle-container">
+        <div class="circle"></div>
+    </div>
 {/each}
 
 
@@ -292,16 +292,16 @@
         @keyframes #{$framesName} {
           from {
             transform: translate3d(
-                #{random(100) + vw},
-                #{$startPositionY + vh},
+                            #{random(100) + vw},
+                            #{$startPositionY + vh},
                             0
             );
           }
 
           to {
             transform: translate3d(
-                #{random(100) + vw},
-                #{- $startPositionY - random(30) + vh},
+                            #{random(100) + vw},
+                            #{- $startPositionY - random(30) + vh},
                             0
             );
           }
