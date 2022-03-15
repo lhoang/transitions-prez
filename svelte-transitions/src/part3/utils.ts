@@ -1,4 +1,4 @@
-import { aperture, splitWhen } from 'ramda';
+import { aperture, splitWhen, Tuple } from 'ramda';
 import type { Line, Song, Word } from './karaoke.interface';
 
 export function convertToSong(text: string) {
@@ -100,8 +100,8 @@ export async function readFile(path: string): Promise<Song> {
   const text = await fetch(path).then((response) => response.text());
 
   // TODO : temp, remove
-  const xpSong = exportSong(text, 4);
-  console.log(xpSong);
+  // const xpSong = exportSong(text, 4);
+  // console.log(xpSong);
 
   return convertToSong(text);
 }
@@ -111,9 +111,9 @@ export function getLineTimings(
   startMs: number,
   beat: number
 ): Array<number> {
-  return aperture(2, [startMs, ...line.words.map((w) => w.ms)]).map(
-    ([start, end]) => (end - start) * beat
-  );
+  const aperture1: Array<Tuple<number, 2>>  =
+    aperture(2, [startMs, ...line.words.map((w) => w.ms)]);
+  return aperture1.map(([start, end]) => (end - start) * beat);
 }
 
 export function getEltPositions(elements: Array<HTMLElement>): Array<number> {
@@ -123,7 +123,7 @@ export function getEltPositions(elements: Array<HTMLElement>): Array<number> {
       .map((wordNode) => {
         const props: DOMRect = wordNode.getBoundingClientRect();
         // remove half the ball and body, main padding/margin
-        const pos = props.left + props.width / 2 - 18 - 24;
+        const pos = props.left + props.width / 2 - 18 ;
         // console.log({pos, text: wordNode.innerText});
         return pos;
       });

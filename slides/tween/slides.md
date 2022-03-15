@@ -413,7 +413,7 @@ $$
 \left\{
   \begin{array}{ll}
     x & = v_0 \cdot cos(\alpha) \cdot t \\
-    z & = -g \cdot \dfrac{t^2}{2} + v_0 \cdot sin(\alpha) \cdot t + h
+    z & = -g \cdot \dfrac{t^2}{2} + v_0 \cdot sin(\alpha) \cdot t
   \end{array}
 \right.
 $$
@@ -453,4 +453,7 @@ const speed = tweened(0, {
 </div>
 ```
 
+---
+layout: iframe
+url: http://localhost:5000/#karaoke
 ---

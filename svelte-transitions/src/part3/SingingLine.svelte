@@ -5,13 +5,14 @@
   import { transpose } from "ramda";
 
   export let song: Song;
-  const ballHigh = 35;
-
+  const ballHigh = 50;
+  const yOffset = -60;
+  const alpha = Math.PI / 4;
+  const v0 = 1.2;
+  const g = 2 * Math.sqrt(2);    // 2 * vO * sin(alpha)
 
   const ballX = tweened(100, {
       interpolate: (a, b) => {
-        const alpha = Math.PI / 4;
-        const v0 = 1.41;
         return t => a + (b - a) * v0 * Math.cos(alpha) * t;
       }
     }
@@ -19,17 +20,14 @@
 
   const ballY = tweened(0, {
     interpolate: () => {
-      const g = 4;
-      const alpha = Math.PI / 4;
-      const v0 = 1.41;
-      return t => g / 2 * Math.pow(t, 2) - v0 * Math.sin(alpha) * t - 1;
+      return t => (g / 2 * Math.pow(t, 2) - v0 * Math.sin(alpha) * t) * ballHigh + yOffset;
     }
   });
 
   let currentLine: Line;
   let start: number;
   let newLineStart: number = 0;
-  let speed = 1.0;
+  let speed = 1.4;
   // Period of a beat in ms.
   $: beat = 60 * 1000 / song.bpm / 2 / speed;
   let lines = song.lyrics;
@@ -69,7 +67,7 @@
           const newLine = lines[++indexLine];
           endLine = newLine.ms;
           currentLine = newLine;
-          ballX.set(100, {duration: 0});
+          ballX.set(0, {duration: 0});
         }
         window.requestAnimationFrame(continuePlaying);
       } else {
@@ -129,11 +127,11 @@
                    bind:value={speed}/>
         </div>
 
-        <!--    <div>Measure : {measure}, beat: {beat}ms, BPM: {song.bpm}</div>-->
+<!--            <div>Measure : {measure}, beat: {beat}ms, BPM: {song.bpm}</div>-->
     </div>
     <div class="lyrics">
         <!--    <div class="ball" style="left:{$ballX}px; bottom: {ballHigh+$ballY*ballHigh}px"></div>-->
-        <div class="ball" style="transform: translate({$ballX}px, {$ballY*ballHigh}px)"></div>
+        <div class="ball" style="transform: translate({$ballX}px, {$ballY}px)"></div>
         <div class="current-line" bind:this={lineElt}>
             {#each currentLine?.words ?? [] as word}
                 <div class="word">
@@ -173,7 +171,8 @@
   }
 
   .speed {
-    display: flex;
+    //display: flex;
+    display: none;
     flex-direction: row;
     justify-content: center;
 
