@@ -3,7 +3,7 @@
 theme: default
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+background: https://images4.alphacoders.com/109/1091773.jpg
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
@@ -55,7 +55,7 @@ layout: iframe-left
 url: http://localhost:5000/#naive
 ---
 
-```ts
+```ts {6|8|9|8-12|7-13|all}
 let x = 10;
 $: cleanX = Math.round(x);
 
@@ -73,7 +73,7 @@ const smoothMove =
 }
 ```
 
-```html
+```html {all|5|all}
 <div class="container">
   <button on:click={() => smoothMove(.25)}>
     Click me
@@ -130,7 +130,7 @@ layout: iframe-left
 url: http://localhost:5000/#naive-tween
 ---
 
-```ts
+```ts {all|4-8|11-17|all}
 export let x = 10;
 
 const tween = 
@@ -154,7 +154,7 @@ const tween =
 $: tween(target, duration);
 ```
 
-```html
+```html {all|2}
 <div class="circle" 
      style="transform: translateX({x/100 * width}px);">
   <span class="text">{cleanX}%</span>
@@ -184,7 +184,7 @@ image: https://images.kernelshirt.com/2021/07/Thats-what-I-do-I-fly-and-I-know-t
 
 # Utilisation
 
-```ts
+```ts {all|5-6|7-9|all}
 const start = window.performance.now();
 
 const animate = (ts: number) => {
@@ -264,7 +264,7 @@ const tween =
   const startPos = x;
   const start = window.performance.now();
   const dist = (t) => 
-          startPos + t * (targetPos - startPos);
+    startPos + t * (targetPos - startPos);
 
   const animate = (ts: number) => {
     const t = (ts - start) / duration;
@@ -308,7 +308,7 @@ url: http://localhost:5000/#svelte-tween
 class: code-sm
 ---
 
-```ts
+```ts {all|2,15,18,23|all}
 export function tween(init: number) {
   const store = writable(init);
   let newPos = init;
@@ -331,7 +331,7 @@ export function tween(init: number) {
       }};
     window.requestAnimationFrame(animate);
   }
-  return { set, subscribe: store.subscribe,};
+  return { set, subscribe: store.subscribe };
 }
 ```
 
@@ -371,7 +371,7 @@ layout: iframe-right
 url: http://localhost:5000/#svg
 ---
 
-```ts
+```ts {all|5-9|10-12|all}
 let path: SVGPathElement;
 let length = 0;
 onMount(() => length = path.getTotalLength());
@@ -426,7 +426,7 @@ url: http://localhost:5000/#bullet
 class: code-sm
 ---
 
-```ts
+```ts {1-5|3|7-11|9|13-17|all}
 const ballX = tweened(0, {
   interpolate: (a, b) => 
     t => a + (b-a) * v0*Math.cos(alpha)*t,
