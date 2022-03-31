@@ -457,3 +457,12 @@ const speed = tweened(0, {
 layout: iframe
 url: http://localhost:5000/#karaoke
 ---
+
+---
+layout: center
+---
+
+### Merci.
+Lien vers la présentation : 
+https://lhoang.github.io/owl/slides/
+![Link https://lhoang.github.io/owl/slides/](/qr.png)
